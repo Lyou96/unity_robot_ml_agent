@@ -1,17 +1,15 @@
 [project]
 name = "unity-robot-ml-agent"
 version = "0.1.0"
-description = "Add your description here"
+description = "unity_robot_ml_agent_project"
 readme = "README.md"
-authors = [
-    { name = "이유찬", email = "pobyjun@naver.com" }
+
+requires-python = ">=3.10.1, <=3.10.12"
+dependencies = [
+    "mlagents",
+    "mlagents-envs"
 ]
-requires-python = ">=3.13"
-dependencies = []
 
-[project.scripts]
-unity-robot-ml-agent = "unity_robot_ml_agent:main"
-
-[build-system]
-requires = ["uv_build>=0.12.10,<0.13.0"]
-build-backend = "uv_build"
+[tool.uv.sources]
+mlagents = { path = "./lib/ml-agents", editable = true }
+mlagents-envs = { path = "./lib/ml-agents-envs", editable = true }
