@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.Properties;
 using UnityEngine;
 
 public class RobotArmController : MonoBehaviour
@@ -63,7 +64,13 @@ public class RobotArmController : MonoBehaviour
 
     public void Drive(int index, float normalizeSpeed, float deltaTime)
     {
+        float beforeAngle = joints[index].Angle;
+        
         joints[index].Drive(normalizeSpeed, deltaTime);
+        if (IsBlocked())
+        {
+            joints[index].ResetTo(beforeAngle);
+        }
     }
     
     
@@ -100,10 +107,56 @@ public class RobotArmController : MonoBehaviour
         }
     }
     
+    
+    
+    // 바닥에서 약간 띄우기
+    public float clearance = 0.07f;
+    public float tipExemptDistance = 0.28f;
+    public float obstacleRadius = 0.16f;
+    public Transform[] obstacles = new Transform[0];
+
+    
+    public Vector3 TipPosition =>
+        tip !=  null ? tip.position : transform.position;
+    
+    
     // 물체 관통 예방
     public bool IsBlocked()
     {
+        var chain  = Chain;
+        float minY = floorHeight + clearance;
+        Vector3 tipPos = TipPosition;
+
+        
+        // 링크 하나 몇점으로 쪼개서 계산할지
+        int samplesPerLink = 6;
+        
+        
+        for (int seg = 0; seg < chain.Length - 1; seg++)
+        {
+            Vector3 a = chain[seg].position;
+            Vector3 b = chain[seg + 1].position;
+
+            for (int s = 0; s <= samplesPerLink; s++)
+            {
+                Vector3 p = Vector3.Lerp(a, b, s/(float)samplesPerLink);
+                
+                //바닥 검사
+                if (ToLocal(p).y < minY) return true;
+
+                
+                
+                if (Vector3.Distance(p, tipPos) <= tipExemptDistance) continue;
+
+                foreach (var o in obstacles)
+                {
+                    if (o == null) continue;
+                    if (Vector3.Distance(p, o.position) < obstacleRadius) return true;
+                }
+            }
+        }
         return false;
     }
-    
+    public Vector3 ToLocal(Vector3 worldPosition) =>
+        transform.InverseTransformPoint(worldPosition);
 }

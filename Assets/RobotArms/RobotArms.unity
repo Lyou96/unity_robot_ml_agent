@@ -226,6 +226,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 469914601}
+  - component: {fileID: 469914602}
   m_Layer: 0
   m_Name: Base
   m_TagString: Untagged
@@ -250,6 +251,47 @@ Transform:
   - {fileID: 62078799}
   m_Father: {fileID: 1209196792}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &469914602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 469914600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d578ef9b2001d7f40b968a34781a5b0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RobotArmController
+  joints:
+  - label: "\uC5B4\uAE68"
+    pivot: {fileID: 1007750762}
+    axis: {x: -1, y: 0, z: 0}
+    minAngle: -10
+    maxAngle: 100
+    maxSpeed: 120
+    startAngle: 45
+  - label: "\uD314\uAFC8\uCE58"
+    pivot: {fileID: 135809106}
+    axis: {x: -1, y: 0, z: 0}
+    minAngle: -130
+    maxAngle: 130
+    maxSpeed: 180
+    startAngle: -60
+  - label: "\uC88C\uC6B0 \uD68C\uC804"
+    pivot: {fileID: 62078799}
+    axis: {x: 0, y: 1, z: 0}
+    minAngle: -120
+    maxAngle: 120
+    maxSpeed: 120
+    startAngle: 0
+  tip: {fileID: 32634289}
+  floorHeight: 0
+  clearance: 0.07
+  tipExemptDistance: 0.28
+  obstacleRadius: 0.16
+  obstacles:
+  - {fileID: 1572891228}
 --- !u!1 &572439961
 GameObject:
   m_ObjectHideFlags: 0
@@ -441,6 +483,7 @@ GameObject:
   - component: {fileID: 713732566}
   - component: {fileID: 713732565}
   - component: {fileID: 713732564}
+  - component: {fileID: 713732567}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -522,6 +565,50 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &713732567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 713732563}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.UniversalAdditionalCameraData
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_AllowHDROutput: 1
+  m_UseScreenCoordOverride: 0
+  m_ScreenSizeOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_TaaSettings:
+    m_Quality: 3
+    m_FrameInfluence: 0.1
+    m_JitterScale: 1
+    m_MipBias: 0
+    m_VarianceClampScale: 0.9
+    m_ContrastAdaptiveSharpening: 0
+  m_Version: 2
 --- !u!1 &843260388
 GameObject:
   m_ObjectHideFlags: 0
