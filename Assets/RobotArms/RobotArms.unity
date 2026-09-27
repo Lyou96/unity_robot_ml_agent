@@ -227,6 +227,9 @@ GameObject:
   m_Component:
   - component: {fileID: 469914601}
   - component: {fileID: 469914602}
+  - component: {fileID: 469914605}
+  - component: {fileID: 469914604}
+  - component: {fileID: 469914603}
   m_Layer: 0
   m_Name: Base
   m_TagString: Untagged
@@ -292,6 +295,75 @@ MonoBehaviour:
   obstacleRadius: 0.16
   obstacles:
   - {fileID: 1572891228}
+  spawnDistanceRange: {x: 1.2, y: 2.4}
+  spawnYawRange: {x: 0, y: 0}
+  spawnHeight: 0.1
+  reach: 2.7
+--- !u!114 &469914603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 469914600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a5c9d521e5ef4759a8246a07d52221e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.ML-Agents::Unity.MLAgents.DecisionRequester
+  DecisionPeriod: 5
+  DecisionStep: 0
+  TakeActionsBetweenDecisions: 1
+--- !u!114 &469914604
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 469914600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8db0fced7b07c9458d3293f12281b40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RobotArmAgent
+  agentParameters:
+    maxStep: 0
+  hasUpgradedFromAgentParameters: 1
+  MaxStep: 1000
+  arm: {fileID: 469914602}
+  targetObject: {fileID: 1572891228}
+  successReward: 1
+--- !u!114 &469914605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 469914600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d1c4e0b1822b495aa52bc52839ecb30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.ML-Agents::Unity.MLAgents.Policies.BehaviorParameters
+  m_BrainParameters:
+    VectorObservationSize: 12
+    NumStackedVectorObservations: 1
+    m_ActionSpec:
+      m_NumContinuousActions: 3
+      BranchSizes: 
+    VectorActionSize: 03000000
+    VectorActionDescriptions: []
+    VectorActionSpaceType: 1
+    hasUpgradedBrainParametersWithActionSpec: 1
+  m_Model: {fileID: 5022602860645237092, guid: c24c558d3c7e1c84f915f8ae229218dc, type: 3}
+  m_InferenceDevice: 0
+  m_BehaviorType: 0
+  m_BehaviorName: RobotArm
+  TeamId: 0
+  m_UseChildSensors: 1
+  m_UseChildActuators: 1
+  m_DeterministicInference: 0
+  m_ObservableAttributeHandling: 0
 --- !u!1 &572439961
 GameObject:
   m_ObjectHideFlags: 0
@@ -559,7 +631,7 @@ Transform:
   m_GameObject: {fileID: 713732563}
   serializedVersion: 2
   m_LocalRotation: {x: 0.19896582, y: 0.43877292, z: -0.10028389, w: 0.8705367}
-  m_LocalPosition: {x: -5, y: 3.4, z: -2.2}
+  m_LocalPosition: {x: -11.57, y: 11.32, z: -5.46}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

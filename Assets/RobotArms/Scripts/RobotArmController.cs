@@ -159,4 +159,37 @@ public class RobotArmController : MonoBehaviour
     }
     public Vector3 ToLocal(Vector3 worldPosition) =>
         transform.InverseTransformPoint(worldPosition);
+    
+    // 받침대에서 멀어진 거리
+    public Vector2 spawnDistanceRange = new Vector2(1.2f, 2.4f);
+    public Vector2 spawnYawRange = new Vector2(0f, 0f);
+    public float spawnHeight = 0.1f;
+
+    public Vector3 SpawnPointLocal(float distance, float yawDegrees)
+    {
+        float yaw = yawDegrees * Mathf.Deg2Rad;
+        return new Vector3(
+            Mathf.Sin(yaw) * distance,
+            spawnHeight,
+            Mathf.Cos(yaw) * distance);
+    }
+
+
+    public float NormalizedAngle(int i)
+    {
+        return joints[i].Angle / 180f;
+    }
+
+    public float NormalizedVelocity(int i)
+    {
+        return joints[i].Velocity / joints[i].maxSpeed;
+    }
+    public float reach = 2.7f;
+    public Vector3 ToNormalizedLocal(Vector3 worldPosition)
+    {
+        return ToLocal(worldPosition) / reach;
+    }
+    
+    
+    
 }
