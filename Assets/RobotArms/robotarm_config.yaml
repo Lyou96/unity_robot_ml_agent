@@ -81,3 +81,60 @@
     
     # 몇 스텝마다 학습 상황(평균 보상 등)을 콘솔과 TensorBoard에 기록할지.
     summary_freq: 10000
+  
+  
+  RobotArmPickPlace: # Unity의 Behavior Name과 똑같아야 연결된다
+    trainer_type: ppo             # 학습 알고리즘 종류. 3장과 같은 PPO를 쓴다
+    
+    
+    hyperparameters:
+      # 한 번 신경망을 고칠 때 참고하는 경험 수. 3장(1024)의 2배로 늘렸다.
+      # 과제가 길어지면 같은 행동도 판마다 결과가 크게 달라진다.
+      # 그래서 더 많은 경험을 모아 평균을 내야 흔들리지 않고 배운다.
+      batch_size: 2048
+      
+      
+      # 학습 전에 모아두는 경험 총량. batch_size의 10배 규칙에 맞춰 함께 늘렸다.
+      buffer_size: 20480
+      
+      
+      learning_rate: 3.0e-4       # 한 번 학습할 때 신경망을 바꾸는 보폭 (3장과 동일)
+      beta: 5.0e-3                # 탐험 강도. 클수록 이것저것 시도해 본다 (3장과 동일)
+      epsilon: 0.2                # 한 번에 행동 방식이 바뀔 수 있는 한계 (3장과 동일)
+      lambd: 0.95                 # 실제 받은 보상 vs 신경망 예측 중 어느 쪽을 더 믿을지
+      num_epoch: 3                # 모아둔 버퍼를 몇 번 반복해서 공부할지
+      
+      
+      # linear = 학습이 진행될수록 점점 줄어든다 / constant = 끝까지 같은 값
+      learning_rate_schedule: linear
+      beta_schedule: constant
+      epsilon_schedule: linear
+    
+    
+    network_settings:
+      normalize: true             # 관측 값의 크기를 자동으로 비슷한 범위로 맞춘다
+      hidden_units: 256           # 한 층의 뉴런 수. 관측이 16개로 늘었지만 256이면 충분하다
+      num_layers: 2               # 신경망 층 수
+    
+    
+    reward_signals:
+      extrinsic: # 코드의 AddReward / SetReward로 준 보상
+        # 미래 보상을 얼마나 중요하게 볼지.
+        # "놓기" 보상은 한참 뒤에 나오므로 먼 미래를 챙기는 0.99가 특히 중요하다.
+        gamma: 0.99
+        strength: 1.0             # 보상 배율. 보상이 하나뿐이면 1.0 그대로
+    
+    
+    # 전체 학습 길이. 3장(100만)의 5배다.
+    # 할 일이 네 단계로 늘어 각 단계를 순서대로 익히는 데 훨씬 오래 걸린다.
+    max_steps: 5000000
+    
+    
+    # 경험을 몇 스텝씩 끊어서 버퍼에 넣을지. 3장(128)의 4배로 늘렸다.
+    # "집기"라는 행동의 결과(놓기 성공)가 한참 뒤에 나온다.
+    # 조각이 짧으면 둘 사이의 연결을 배우기 어렵다.
+    time_horizon: 512
+    
+    
+    # 학습 기록을 남기는 간격. 전체 학습이 길어진 만큼 간격도 늘렸다.
+    summary_freq: 20000

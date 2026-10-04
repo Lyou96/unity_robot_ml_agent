@@ -228,8 +228,9 @@ GameObject:
   - component: {fileID: 469914601}
   - component: {fileID: 469914602}
   - component: {fileID: 469914605}
-  - component: {fileID: 469914604}
   - component: {fileID: 469914603}
+  - component: {fileID: 469914606}
+  - component: {fileID: 469914607}
   m_Layer: 0
   m_Name: Base
   m_TagString: Untagged
@@ -272,21 +273,21 @@ MonoBehaviour:
     axis: {x: -1, y: 0, z: 0}
     minAngle: -10
     maxAngle: 100
-    maxSpeed: 120
+    maxSpeed: 60
     startAngle: 45
   - label: "\uD314\uAFC8\uCE58"
     pivot: {fileID: 135809106}
     axis: {x: -1, y: 0, z: 0}
     minAngle: -130
-    maxAngle: 130
-    maxSpeed: 180
+    maxAngle: 0
+    maxSpeed: 90
     startAngle: -60
   - label: "\uC88C\uC6B0 \uD68C\uC804"
     pivot: {fileID: 62078799}
     axis: {x: 0, y: 1, z: 0}
     minAngle: -120
     maxAngle: 120
-    maxSpeed: 120
+    maxSpeed: 60
     startAngle: 0
   tip: {fileID: 32634289}
   floorHeight: 0
@@ -314,7 +315,61 @@ MonoBehaviour:
   DecisionPeriod: 5
   DecisionStep: 0
   TakeActionsBetweenDecisions: 1
---- !u!114 &469914604
+--- !u!114 &469914605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 469914600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d1c4e0b1822b495aa52bc52839ecb30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.ML-Agents::Unity.MLAgents.Policies.BehaviorParameters
+  m_BrainParameters:
+    VectorObservationSize: 16
+    NumStackedVectorObservations: 1
+    m_ActionSpec:
+      m_NumContinuousActions: 3
+      BranchSizes: 02000000
+    VectorActionSize: 
+    VectorActionDescriptions: []
+    VectorActionSpaceType: 1
+    hasUpgradedBrainParametersWithActionSpec: 1
+  m_Model: {fileID: 0}
+  m_InferenceDevice: 0
+  m_BehaviorType: 0
+  m_BehaviorName: RobotArmPickPlace
+  TeamId: 0
+  m_UseChildSensors: 1
+  m_UseChildActuators: 1
+  m_DeterministicInference: 0
+  m_ObservableAttributeHandling: 0
+--- !u!114 &469914606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 469914600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79f4a025c455a0341b2e4a7395fcd925, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RobotArmPickPlaceAgent
+  agentParameters:
+    maxStep: 0
+  hasUpgradedFromAgentParameters: 1
+  MaxStep: 3000
+  arm: {fileID: 469914602}
+  targetObject: {fileID: 1572891228}
+  placeTarget: {fileID: 572439962}
+  grabReward: 0.5
+  placeReward: 1
+  dropPenalty: -0.3
+  lostPenalty: -0.5
+--- !u!114 &469914607
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -329,41 +384,10 @@ MonoBehaviour:
   agentParameters:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
-  MaxStep: 1000
+  MaxStep: 100000
   arm: {fileID: 469914602}
   targetObject: {fileID: 1572891228}
   successReward: 1
---- !u!114 &469914605
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 469914600}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d1c4e0b1822b495aa52bc52839ecb30, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.ML-Agents::Unity.MLAgents.Policies.BehaviorParameters
-  m_BrainParameters:
-    VectorObservationSize: 12
-    NumStackedVectorObservations: 1
-    m_ActionSpec:
-      m_NumContinuousActions: 3
-      BranchSizes: 
-    VectorActionSize: 03000000
-    VectorActionDescriptions: []
-    VectorActionSpaceType: 1
-    hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 5022602860645237092, guid: 8093ec415be85be4f80544d303e605e0, type: 3}
-  m_InferenceDevice: 0
-  m_BehaviorType: 0
-  m_BehaviorName: RobotArm
-  TeamId: 0
-  m_UseChildSensors: 1
-  m_UseChildActuators: 1
-  m_DeterministicInference: 0
-  m_ObservableAttributeHandling: 0
 --- !u!1 &572439961
 GameObject:
   m_ObjectHideFlags: 0
